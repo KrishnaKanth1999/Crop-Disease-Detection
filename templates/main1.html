@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<style type="text/css">
+	.jumbotron { max-height: 5px; }
+
+</style>
+
+
+<head>
+
+		<title> </title>
+</head>
+
+
+<script type="text/javascript">function jsredir() {
+  window.location.href = "https://stackoverflow.com";
+}</script>
+
+<script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 9.884557299999999, lng: 78.0795188},
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+    </script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2wK_w1x0gEF77jXFILcrVyGH2fRceBxM&libraries=places&callback=initAutocomplete"
+         async defer></script>
+
+<body>
+	
+
+	<div class="container">
+  <div class="row">
+
+    <div class="col-9">
+<div class="jumbotron jumbotron-fluid" style="height:100px;background-color: #06A87F;">
+
+    		<h1 class="col-8 offset-3">CROP DISEASE DETECTOR</h1>
+
+
+	</div>
+		<div >
+
+ 		 <b>  <center> <p class="h5"> ENTER YOUR DETAILS TO GET IN TOUCH WITH VENDORS </p> </center> </b>
+ 		     <br>
+		<form class="form-inline">
+  	<div class="form-group mb-2">
+  		<div class="row-4"></div>
+
+    <label  class="sr-only">Name</label>
+  <input type="Email" class="form-control name" id="inputPassword2" placeholder="Name">  	</div>
+  	<div class="form-group mx-sm-3 mb-2">
+
+    <label for="inputPassword2" class="sr-only">Email</label>
+
+ <input type="Email" class="form-control mail" id="inputPassword3" placeholder="Email">
+<!--
+ 	  <input type="Email" class="form-control mail" id="inputPassword3" placeholder="Email">
+
+-->
+		<input type="Email" style="margin-left:20px" class="form-control number" id="inputPassword4" placeholder="number">
+
+  	</div>
+  	<div class="form-group" >
+    <label for="inputPassword2" class="sr-only number" style="margin-left:20px"> Ph no</label>
+<!--
+ 	  <input type="Email" class="form-control number" id="inputPassword4" placeholder="Ph no">
+-->
+  	</div>
+  </form>
+ <p align="center">
+<small id="emailHelp" class="form-text text-muted">We won't exploit  your details in anyways.</small> </p>
+ 
+<p align="center">
+  <button type="submit" class="btn btn-primary mx-sm-4 mb-6 user_details">Confirm identity</button> </p>
+</div>
+
+
+	  <div class="row" >
+
+		  <h4 class="col-7 offset-3" style="margin-top:30px" >UPLOAD YOUR DISEASE AFFECTED CROPS</h4>
+	  </div>
+
+
+
+
+
+<form id="upload-file" method="post" enctype="multipart/form-data" style="margin-top:30px">
+
+	<div class="row">
+
+
+        <input name="file" type="file" class="btn btn-primary">
+
+  <div class="col-4">
+        <button id="upload-file-btn" type="button" class="btn btn-success" style="height:50px">Upload</button>
+   </div>
+	</div>
+</form>
+
+
+			<div class="col-12" style="margin-top:30px">
+				<b style="text-transform:uppercase; font-size:25px">Disease Name:</b><span class="causes0"></span></p>
+				<p><b style="text-transform: uppercase; font-size:25px">Causes:</b><span class="causes1"></span></p>
+				<b style="text-transform: uppercase; font-size:25px">Symptoms:</b><span class="causes2"></span></p>
+				<b style="text-transform: uppercase; font-size:25px">Natural Control:</b><span class="causes3"></span></p>
+				<b style="text-transform:uppercase; font-size:25px">Chemical Control:</b><span class="causes4"></span></p>
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+    <div class="col-3" style="background-color: #06A87F;" >
+    	<br>
+
+		<center><h1 style="text-transform: capitalize"><font face="Times new roman">Save Your Crop in 4 Steps</font></h1>  </center>
+     <center>
+	<br>
+    	  <center>
+         
+  <img src="https://assets.ubuntu.com/v1/2ffbc5f2-pictogram-upload-orange.svg" alt="Trulli" style="width:25%">
+  <figcaption>Upload The Crop Image</figcaption> <br> 
+
+   <img src="https://media.licdn.com/mpr/mpr/gcrc/dms/image/C4E12AQH1Ny3r00f-sg/article-cover_image-shrink_720_1280/0?e=1542240000&v=beta&t=fNjbnk-qhkLC06UfhxnRImIEVvIFuNtcEDS4kI-y2ZQ" alt="Trulli" style="width:25%">
+  <figcaption>Understand The Root Cause</figcaption> <br> <br>
+
+  <img src="https://www.freeiconspng.com/uploads/buy-now-circle-transparent-png-23.png" alt="Trulli" style="width:25%">
+  <figcaption>Buy the pesticides</figcaption> <br> <br>
+
+<img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/201303/pesticide-muddle-1_660_032813015033.jpg" alt="Trulli" style="width:25%">
+  <figcaption> Pour pesticides to plant </figcaption> <br> <br>
+
+
+  </center>
+	 </center>
+
+    </div>
+
+  </div>
+		<div class="row">
+
+<h3 class="col offset-4">Pesticides Shops nearby you</h3>
+<center><input id="pac-input" class="controls" type="text" placeholder="Search Box" value="pesticide shops">
+<div id="map" class="col offset-1" style="width:1000px;height:400px;background:yellow;margin-top:50px"></div> </center>
+
+
+   </div>
+</div>
+
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}">
+
+
+ </script>
+ </html>
+
